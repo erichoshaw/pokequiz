@@ -5,14 +5,55 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./analysis.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            function success() {
+                return
+            }
+            $.ajax({
+                url: './analysis.js',
+                dataType: "script",
+                success: success
+            });
+
             $('td').click(function() {
                 $(this).find('input:radio').prop('checked', true)
+            });
+
+            $('#final-submit').click(function() {
+                console.log(read_results())
+
+
+
+
+                var mon = 'dunsparce';
+                link = 'https://pokemondb.net/pokedex/';
+                link = link.concat(mon);
+                titl = 'You got ';
+                titl = titl.concat(mon.toUpperCase());
+                titl = titl.concat('!');
+                fromPage = 'Default Species Tag'
+
+                /*$.ajax({
+                    url: link,
+                    type: 'GET',
+                    success: function(data) {
+                        var content = $('#content').html($(data).find('#content').html());
+                        fromPage = $(content).find('#tab-basic-206 > div:nth-child(1) > div:nth-child(2) > table > tbody > tr:nth-child(3) > td').text();
+                    }
+                });*/
+
+
+                $('#result-slogan').text(fromPage)
+                $('#result-link').attr('href', link);
+                $('#result-name').text(titl);
+                $('#result-box').prop('hidden', false);
             });
         });
 
     </script>
+    <title>Pok&eacute;quiz</title>
 </head>
 
 <body>
@@ -88,6 +129,19 @@
                     </td>
                 </tr>
             </table>
+            <p>&nbsp;</p>
+            <div class="container-sm" style="text-align: center">
+                <button type="button" class="btn btn-primary" id="final-submit">Ready to submit?</button>
+            </div>
+            <p>&nbsp;</p>
+            <div class="card" style="width: 70%" id="result-box" hidden>
+                <div class="card-body">
+                    <h5 class="card-title" id="result-name">You got NAME</h5>
+                    <h6 class="card-subtitle mb-2 text-muted" id="result-slogan">The fuckin lame Pok&eacute;mon.</h6>
+                    <p class="card-text" id="result-pokedex">Here is some info on it.</p>
+                    <a href="#" class="card-link" id="result-link" target="_blank">Check out more stats and info!</a>
+                </div>
+            </div>
         </div>
     </div>
 </body>
