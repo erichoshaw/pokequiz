@@ -8,13 +8,12 @@
     <script type="text/javascript" src="./analysis.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            function success() {
-                return
-            }
             $.ajax({
                 url: './analysis.js',
                 dataType: "script",
-                success: success
+                success: function() {
+                    return
+                }
             });
 
             $('td').click(function() {
@@ -22,7 +21,7 @@
             });
 
             $('#final-submit').click(function() {
-                console.log(read_results())
+                console.log(rta())
 
 
 
