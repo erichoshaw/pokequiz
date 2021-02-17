@@ -25,6 +25,7 @@ var ques_attrs = {
     '2': 'agreeableness'
 }
 
+var ques_stats =     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 var attr_collected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 function get_q_attr(q_num) {
@@ -64,3 +65,11 @@ function rta() {
     return apply_results(transform_results(read_results()))
 }
 
+function analyze() {
+    var i;
+    var attr_final = [];
+    for (i = 0; i < attr_collected.length; i++) {
+        attr_final[i] = attr_collected[i] * (50 / 3) * (1 / ques_stats[i]);
+    }
+    return attr_final;
+}
