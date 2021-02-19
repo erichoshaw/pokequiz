@@ -1,5 +1,5 @@
 // analyze and determine the resultant pokemon
-var num_questions = 2
+var num_questions = 8
 
 var attr_map = {
     "openness": 0,
@@ -21,12 +21,18 @@ var attr_map = {
 }
 
 var ques_attrs = {
-    '1': 'adventurousness',
-    '2': 'agreeableness'
+    '1': 'openness',
+    '2': 'adventurousness',
+    '3': 'creativity',
+    '4': 'intellectual',
+    '5': 'extraversion',
+    '6': 'seriousness',
+    '7': 'dependability',
+    '8': 'honesty'
 }
 
 var ques_stats =     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-var attr_collected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+var attr_collected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 function get_q_attr(q_num) {
     return attr_map[ques_attrs[q_num.toString()]]
@@ -41,6 +47,7 @@ function read_results() {
         selector = group_name.concat(i.toString()).concat(']');
         result_array.push($(selector).filter(':checked').attr('id').substr(3));
     }
+    console.log('result is ' + result_array);
     return result_array;
 }
 
@@ -54,6 +61,7 @@ function transform_results(results) {
 }
 
 function apply_results(results) {
+    attr_collected = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     var i;
     for (i = 0; i < results.length; i++) {
         attr_collected[get_q_attr(i + 1)] += results[i]
